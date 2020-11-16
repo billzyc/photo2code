@@ -1,1 +1,1 @@
-# photo2code-backend
+# photo2code
