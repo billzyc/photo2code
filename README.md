@@ -7,6 +7,7 @@ For local development:
 `cd flask/`    
 
 2) Activate virtual env  
+`python -m venv env`  
 `source env/bin/activate`  
 
 3) Install requirements  
