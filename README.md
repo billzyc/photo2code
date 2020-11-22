@@ -27,4 +27,15 @@ To build and start containers:
 `docker-compose up --build`
 
 Remove containers and network:
- `docker-compose down`
+ `docker-compose down -v`
+
+Build the new image and spin up the two containers:
+
+$ docker-compose up -d --build
+
+Create the table:
+
+$ docker-compose exec flask python run.py create_db
+
+
+docker-compose exec db psql --username=hello_flask --dbname=hello_flask_dev
