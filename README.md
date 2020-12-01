@@ -24,18 +24,16 @@ Start the containers:
 `docker-compose up`
 
 To build and start containers:
-`docker-compose up --build`
+`docker-compose up -d --build`
 
 Remove containers and network:
  `docker-compose down -v`
 
-Build the new image and spin up the two containers:
+## Set environmental variables
 
-$ docker-compose up -d --build
+Linux bash or Mac OS X:   
+`export GOOGLE_CLIENT_ID=your_client_id`  
+`export GOOGLE_CLIENT_SECRET=your_client_id`  
 
-Create the table:
-
-$ docker-compose exec flask python run.py create_db
-
-
-docker-compose exec db psql --username=hello_flask --dbname=hello_flask_dev
+Windows:  
+`set GOOGLE_CLIENT_ID=your_client_id`  
