@@ -40,9 +40,3 @@ class CodeFile(db.Model):
         self.content = content
         self.language = language
         self.user_id = user_id
-
-
-db.drop_all()
-db.create_all()
-db.session.commit()
-print("db created")
