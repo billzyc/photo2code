@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from authlib.integrations.flask_client import OAuth
+from app.models import db
 import os
 
 # from flask_bcrypt import Bcrypt
@@ -9,7 +10,10 @@ import os
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 app.config.from_object("app.config.Config")
-db = SQLAlchemy(app)
+
+# initialize SQLAlchemy
+db.init_app(app)
+
 oauth = OAuth(app)
 
 google = oauth.register(
@@ -26,4 +30,3 @@ google = oauth.register(
 )
 
 from app import views
-
