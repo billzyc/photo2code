@@ -7,6 +7,7 @@ import os
 
 
 app = Flask(__name__)
+
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
 app.config.from_object("app.config.Config")
 
@@ -27,3 +28,5 @@ google = oauth.register(
     userinfo_endpoint="https://openidconnect.googleapis.com/v1/userinfo",  # This is only needed if using openId to fetch user info
     client_kwargs={"scope": "openid email profile"},
 )
+
+from app import views
