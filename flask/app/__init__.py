@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from authlib.integrations.flask_client import OAuth
 from app.models import db
 import os
@@ -28,5 +27,3 @@ google = oauth.register(
     userinfo_endpoint="https://openidconnect.googleapis.com/v1/userinfo",  # This is only needed if using openId to fetch user info
     client_kwargs={"scope": "openid email profile"},
 )
-
-from app import views
