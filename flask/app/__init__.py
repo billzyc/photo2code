@@ -9,7 +9,8 @@ import os
 app = Flask(__name__)
 
 app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(24)
-app.config.from_object("app.config.Config")
+app.config.from_object(os.environ['APP_SETTINGS'])
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # initialize SQLAlchemy
 db.init_app(app)
