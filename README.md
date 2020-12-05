@@ -13,15 +13,14 @@ For local development:
 ``echo "source `which activate.sh`" >> ~/.bashrc``
 `source ~/.bashrc`
 
-
-3) Install requirements  
-`pip3 install -r requirements.txt`
-
-4) Setup local dev psql  
+3) Setup local dev psql  
 See PSQL section below  
 
-5) Run dev server  
+4) Run dev server  
 `cd flask/`  
+`pip3 install -r requirements.txt`  
+Set Google Client Id/Secret environment variable.  
+`python3 manage.py db upgrade`  
 `flask run`  
 
 ## PSQL:
