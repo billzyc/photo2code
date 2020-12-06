@@ -9,9 +9,9 @@ from app.ocr import get_image_text
 
 @app.route("/")
 def index():
-    sessDict = dict(session)
-    if sessDict.get("profile", None) != None:
-        profile = sessDict.get("profile", None)
+    sess_dict = dict(session)
+    if sess_dict.get("profile", None) != None:
+        profile = sess_dict.get("profile", None)
         return f"Hello, you are logged in as {profile['first_name']}!"
     return f"Hello, you are logged in as none!"
 
@@ -53,23 +53,22 @@ def logout():
 
 @app.route("/upload-image", methods=["GET", "POST"])
 def upload_image():
-    sessDict = dict(session)
-    if sessDict.get("profile", None) != None:
+    sess_dict = dict(session)
+    if sess_dict.get("profile", None) != None:
         if request.method == "POST":
-            user_id = sessDict.get("profile", None)["id"]
+            user_id = sess_dict.get("profile", None)["id"]
             if request.files and user_id != None:
-                fileName = request.values["title"]
+                file_name = request.values["title"]
                 image = request.files["image"]
                 language = request.values["language"]
                 text = get_image_text(image)
-                newFile = CodeFile(
-                    title=fileName,
-                    ## TODO: replace with actual content
+                new_file = CodeFile(
+                    title=file_name,
                     content=text,
                     language=language,
                     user_id=user_id,
                 )
-                db.session.add(newFile)
+                db.session.add(new_file)
                 db.session.commit()
                 return "uploaded"
         return render_template("public/upload_image.html")
@@ -78,9 +77,9 @@ def upload_image():
 
 @app.route("/get-image", methods=["GET"])
 def get_file():
-    sessDict = dict(session)
-    if sessDict.get("profile", None) != None:
-        user_id = sessDict.get("profile", None)["id"]
+    sess_dict = dict(session)
+    if sess_dict.get("profile", None) != None:
+        user_id = sess_dict.get("profile", None)["id"]
         file_title = (
             request.values["title"]
             if request.values["title"] != None
