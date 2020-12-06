@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request, render_template, redirect, send_file
 import tempfile
 from io import BytesIO
 from flask import redirect, url_for, session, render_template
+from app.ocr import get_image_text
 
 
 @app.route("/")
@@ -60,11 +61,11 @@ def upload_image():
                 fileName = request.values["title"]
                 image = request.files["image"]
                 language = request.values["language"]
-
+                text = get_image_text(image)
                 newFile = CodeFile(
                     title=fileName,
                     ## TODO: replace with actual content
-                    content="Sample text here",
+                    content=text,
                     language=language,
                     user_id=user_id,
                 )
@@ -95,4 +96,3 @@ def get_file():
         else:
             return f"No file name {file_title}"
     return "please login"
-
