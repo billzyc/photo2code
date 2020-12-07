@@ -2,6 +2,7 @@ import os
 import io
 from google.cloud import vision
 
+
 def get_image_text(file):
     # Initialize Client
     client = vision.ImageAnnotatorClient()
@@ -11,7 +12,7 @@ def get_image_text(file):
     if response.error.message:
         raise Exception(
             '{}\nFor more info on error messages, check: '
-            'https://cloud.google.com/apis/design/errors'.format(
-                response.error.message))
+            'https://cloud.google.com/apis/design/errors'.format(response.error.message)
+        )
 
     return response.full_text_annotation.text
