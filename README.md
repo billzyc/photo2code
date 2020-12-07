@@ -80,7 +80,8 @@ Remove containers and network:
 
 Linux bash or Mac OS X:   
 `export GOOGLE_CLIENT_ID=your_client_id`  
-`export GOOGLE_CLIENT_SECRET=your_client_id`  
+`export GOOGLE_CLIENT_SECRET=your_client_id`
+`export GOOGLE_APPLICATION_CREDENTIALS="[PATH]"`
 
 Windows:  
 `set GOOGLE_CLIENT_ID=your_client_id`  
