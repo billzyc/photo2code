@@ -1,12 +1,16 @@
 from flask import Flask
 from authlib.integrations.flask_client import OAuth
 from app.models import db
-import os
+from flask_cors import CORS
 
-# from flask_bcrypt import Bcrypt
+import os
 
 
 app = Flask(__name__)
+
+##TODO: set up resource specific cors
+CORS(app)
+
 
 app.secret_key = os.environ.get('SECRET_KEY') or os.urandom(24)
 app.config.from_object(os.environ['APP_SETTINGS'])
