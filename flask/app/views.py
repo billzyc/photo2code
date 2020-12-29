@@ -7,7 +7,7 @@ import os
 from io import BytesIO
 from flask import redirect, url_for, session, render_template
 from app.ocr import get_image_text
-from app.utils.authenticate import authenticateToken
+from app.utils.authenticate import authenticateToken, getProfileFromToken
 from google.oauth2 import id_token
 from google.auth.transport import requests
 import datetime
@@ -58,7 +58,8 @@ def authorize():
 def googleSignin():
     try:
         google_token = request.json['gToken']
-        id_info = id_token.verify_oauth2_token(google_token, requests.Request(), os.environ.get('GOOGLE_CLIENT_ID', None))
+        id_info = id_token.verify_oauth2_token(
+            google_token, requests.Request(), os.environ.get('GOOGLE_CLIENT_ID', None))
         if id_info['email'] and id_info['email_verified']:
             user_profile = User.query.filter_by(email=id_info['email']).first()
             if user_profile is None:
@@ -69,24 +70,25 @@ def googleSignin():
                 )
                 db.session.add(user_profile)
                 db.session.commit()
-        
+
         token = jwt.encode({
             'user': id_info['email'],
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(days = 16)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=16)
         },
-        app.config['SECRET_KEY'])
+            app.config['SECRET_KEY'])
         return jsonify({'token': token})
-    
+
     except ValueError:
         # Invalid token
         return make_response('Unable to verify', 403, {'WWW-Authenticate': 'login error'})
 
-@app.route('/testauth', methods=['GET', 'POST'])
+
+@app.route('/profile', methods=['POST'])
 @authenticateToken
 def testauth():
-    token =  request.headers.get('Jwt')
-    user_data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
-    return jsonify({'message': 'this is protected!'})
+    user_data = getProfileFromToken(request)
+    return jsonify({'user_data': user_data})
+
 
 @app.route('/logout')
 def logout():
@@ -129,7 +131,8 @@ def get_file():
             if request.values['title'] != None
             else request.args.get('title')
         )
-        file_data = CodeFile.query.filter_by(user_id=user_id, title=file_title).first()
+        file_data = CodeFile.query.filter_by(
+            user_id=user_id, title=file_title).first()
         if file_data != None:
             return send_file(
                 BytesIO(bytes(file_data.content, 'utf-8')),
