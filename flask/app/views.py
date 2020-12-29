@@ -1,15 +1,16 @@
 from app import db, app, oauth
 from app.models import CodeFile, User
 from flask import Flask, jsonify, request, render_template, redirect, send_file, make_response
-import jwt
-import tempfile
-import os
 from io import BytesIO
 from flask import redirect, url_for, session, render_template
 from app.ocr import get_image_text
 from app.utils.authenticate import authenticateToken, getProfileFromToken
 from google.oauth2 import id_token
 from google.auth.transport import requests
+
+import jwt
+import tempfile
+import os
 import datetime
 
 
@@ -21,14 +22,18 @@ def index():
         return f'Hello, you are logged in as {profile["first_name"]}!'
     return f'Hello, you are logged in as none!'
 
-## left for testing purposes
+# left for testing purposes
+
+
 @app.route('/login')
 def login():
     google = oauth.create_client('google')  # create the google oauth client
     redirect_uri = url_for('authorize', _external=True)
     return google.authorize_redirect(redirect_uri)
 
-## left for testing purposes
+# left for testing purposes
+
+
 @app.route('/authorize')
 def authorize():
     google = oauth.create_client('google')  # create the google oauth client
@@ -86,7 +91,7 @@ def googleSignin():
 @app.route('/profile', methods=['POST'])
 @authenticateToken
 def testauth():
-    #TODO return actual profile info
+    # TODO return actual profile info
     user_data = getProfileFromToken(request)
     return jsonify({'user_data': user_data})
 

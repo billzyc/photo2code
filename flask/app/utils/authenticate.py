@@ -4,18 +4,6 @@ from functools import wraps
 import jwt
 
 
-def authenticateToken(func):
-    @wraps(func)
-    def wrapped(*args, **kwargs):
-        user_info = getProfileFromToken(request)
-
-        if not user_info:
-            return jsonify({'message': 'Missing or Invalid token'}), 403
-
-        return func(*args, **kwargs)
-    return wrapped
-
-
 def getProfileFromToken(webRequest):
     token = webRequest.headers.get('Jwt')
 
@@ -27,3 +15,15 @@ def getProfileFromToken(webRequest):
 
     except:
         return None
+
+
+def authenticateToken(func):
+    @wraps(func)
+    def wrapped(*args, **kwargs):
+        user_info = getProfileFromToken(request)
+
+        if not user_info:
+            return jsonify({'message': 'Missing or Invalid token'}), 403
+
+        return func(*args, **kwargs)
+    return wrapped
