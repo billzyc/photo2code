@@ -21,14 +21,14 @@ def index():
         return f'Hello, you are logged in as {profile["first_name"]}!'
     return f'Hello, you are logged in as none!'
 
-
+## left for testing purposes
 @app.route('/login')
 def login():
     google = oauth.create_client('google')  # create the google oauth client
     redirect_uri = url_for('authorize', _external=True)
     return google.authorize_redirect(redirect_uri)
 
-
+## left for testing purposes
 @app.route('/authorize')
 def authorize():
     google = oauth.create_client('google')  # create the google oauth client
@@ -86,6 +86,7 @@ def googleSignin():
 @app.route('/profile', methods=['POST'])
 @authenticateToken
 def testauth():
+    #TODO return actual profile info
     user_data = getProfileFromToken(request)
     return jsonify({'user_data': user_data})
 
