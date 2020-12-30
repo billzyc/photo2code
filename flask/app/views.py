@@ -22,43 +22,6 @@ def index():
         return f'Hello, you are logged in as {profile["first_name"]}!'
     return f'Hello, you are logged in as none!'
 
-# left for testing purposes
-
-
-@app.route('/login')
-def login():
-    google = oauth.create_client('google')  # create the google oauth client
-    redirect_uri = url_for('authorize', _external=True)
-    return google.authorize_redirect(redirect_uri)
-
-# left for testing purposes
-
-
-@app.route('/authorize')
-def authorize():
-    google = oauth.create_client('google')  # create the google oauth client
-    token = (
-        google.authorize_access_token()
-    )  # Access token from google (needed to get user info)
-    resp = google.get('userinfo')
-    user_info = resp.json()
-    user = oauth.google.userinfo()
-    user_profile = User.query.filter_by(email=user_info['email']).first()
-    if user_profile is None:
-        user_profile = User(
-            user_info['email'],
-            user_info['given_name'],
-            user_info['family_name']
-        )
-        db.session.add(user_profile)
-        db.session.commit()
-    session['profile'] = user_profile.profileMap()
-    session.permanent = (
-        True  # make the session permanant so it keeps existing after broweser gets closed
-    )
-    return redirect('/')
-
-
 @app.route('/googleSignin', methods=['POST'])
 def googleSignin():
     try:
@@ -103,8 +66,8 @@ def logout():
     return redirect('/')
 
 
-@app.route('/upload-image', methods=['GET', 'POST'])
-def upload_image():
+@app.route('/test-upload-image', methods=['GET', 'POST'])
+def test_upload_image():
     sess_dict = dict(session)
     if sess_dict.get('profile', None) != None:
         if request.method == 'POST':
@@ -127,8 +90,44 @@ def upload_image():
     return 'please login'
 
 
-@app.route('/get-image', methods=['GET'])
-def get_file():
+# All routes below left for api testing
+
+
+@app.route('/login')
+def login():
+    google = oauth.create_client('google')  # create the google oauth client
+    redirect_uri = url_for('authorize', _external=True)
+    return google.authorize_redirect(redirect_uri)
+
+
+@app.route('/authorize')
+def authorize():
+    google = oauth.create_client('google')  # create the google oauth client
+    token = (
+        google.authorize_access_token()
+    )  # Access token from google (needed to get user info)
+    resp = google.get('userinfo')
+    user_info = resp.json()
+    user = oauth.google.userinfo()
+    user_profile = User.query.filter_by(email=user_info['email']).first()
+    if user_profile is None:
+        user_profile = User(
+            user_info['email'],
+            user_info['given_name'],
+            user_info['family_name']
+        )
+        db.session.add(user_profile)
+        db.session.commit()
+    session['profile'] = user_profile.profileMap()
+    session.permanent = (
+        True  # make the session permanant so it keeps existing after broweser gets closed
+    )
+    return redirect('/')
+
+
+
+@app.route('/test-get-image', methods=['GET'])
+def test_get_file():
     sess_dict = dict(session)
     if sess_dict.get('profile', None) != None:
         user_id = sess_dict.get('profile', None)['id']
