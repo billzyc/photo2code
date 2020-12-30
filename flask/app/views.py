@@ -22,6 +22,7 @@ def index():
         return f'Hello, you are logged in as {profile["first_name"]}!'
     return f'Hello, you are logged in as none!'
 
+
 @app.route('/googleSignin', methods=['POST'])
 def googleSignin():
     try:
@@ -66,30 +67,6 @@ def logout():
     return redirect('/')
 
 
-@app.route('/test-upload-image', methods=['GET', 'POST'])
-def test_upload_image():
-    sess_dict = dict(session)
-    if sess_dict.get('profile', None) != None:
-        if request.method == 'POST':
-            user_id = sess_dict.get('profile', None)['id']
-            if request.files and user_id != None:
-                file_name = request.values['title']
-                image = request.files['image']
-                language = request.values['language']
-                text = get_image_text(image)
-                new_file = CodeFile(
-                    title=file_name,
-                    content=text,
-                    language=language,
-                    user_id=user_id,
-                )
-                db.session.add(new_file)
-                db.session.commit()
-                return 'uploaded'
-        return render_template('public/upload_image.html')
-    return 'please login'
-
-
 # All routes below left for api testing
 
 
@@ -125,7 +102,6 @@ def authorize():
     return redirect('/')
 
 
-
 @app.route('/test-get-image', methods=['GET'])
 def test_get_file():
     sess_dict = dict(session)
@@ -146,4 +122,28 @@ def test_get_file():
             )
         else:
             return f'No file name {file_title}'
+    return 'please login'
+
+
+@app.route('/test-upload-image', methods=['GET', 'POST'])
+def test_upload_image():
+    sess_dict = dict(session)
+    if sess_dict.get('profile', None) != None:
+        if request.method == 'POST':
+            user_id = sess_dict.get('profile', None)['id']
+            if request.files and user_id != None:
+                file_name = request.values['title']
+                image = request.files['image']
+                language = request.values['language']
+                text = get_image_text(image)
+                new_file = CodeFile(
+                    title=file_name,
+                    content=text,
+                    language=language,
+                    user_id=user_id,
+                )
+                db.session.add(new_file)
+                db.session.commit()
+                return 'uploaded'
+        return render_template('public/upload_image.html')
     return 'please login'
