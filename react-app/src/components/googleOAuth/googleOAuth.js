@@ -1,7 +1,7 @@
 import GoogleLogin from "react-google-login";
 import { useCookies } from "react-cookie";
 
-import "./googleOAuth.css";
+import "./googleOAuth.scss";
 
 function GoogleOAuth() {
   const [cookies, setCookie] = useCookies(["token"]);

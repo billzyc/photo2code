@@ -1,13 +1,13 @@
 import { CookiesProvider } from 'react-cookie';
-import './App.css';
-import GoogleOAuth from './components/googleOAuth/googleOAuth.js';
+import './App.scss';
+import Login from './pages/login/login.js';
 
 function App() {
 
 
   return (
     <CookiesProvider>
-      <GoogleOAuth/>
+      <Login/>
     </CookiesProvider>
   );
 }
