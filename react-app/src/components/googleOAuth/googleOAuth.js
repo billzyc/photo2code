@@ -10,7 +10,6 @@ function GoogleOAuth() {
     "681258670642-cdmnl2u2f679khc07railjprdct59n66.apps.googleusercontent.com";
 
   const onSuccess = async (response) => {
-
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -23,7 +22,7 @@ function GoogleOAuth() {
     );
 
     const data = await apiResponse.json();
-    setCookie('token',data.token, { path: '/' });
+    setCookie("token", data.token, { path: "/" });
   };
 
   const onFail = () => {
