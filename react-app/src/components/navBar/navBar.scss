@@ -1,0 +1,10 @@
+@import "../../styles/shared.scss";
+
+.navBar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 20;
+  box-shadow: $softShadow
+}

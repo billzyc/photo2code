@@ -1,4 +1,3 @@
-@import 'fonts.scss';
 @import 'shared.scss';
 
 :root {
@@ -34,6 +33,7 @@ body {
   flex-direction: column;
   position: relative;
   min-height: 100vh;
+  min-width: 100vw;
   background-color: $page-bg-color;
   z-index: 0;
 }

@@ -31,8 +31,9 @@ function GoogleOAuth() {
 
   return (
     <GoogleLogin
+    className="login-button"
       clientId={clientId}
-      buttonText="login with google!"
+      buttonText="login!"
       onSuccess={onSuccess}
       onFailure={onFail}
       cookiePolicy={"single_host_origin"}
