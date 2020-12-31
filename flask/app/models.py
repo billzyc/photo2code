@@ -37,6 +37,12 @@ class CodeFile(db.Model):
     language = db.Column(db.String(50), nullable=False)
     # image_file = db.Column(db.String(20), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    
+    def getMap(self):
+        return {'id': self.id, 'title': self.title, 'date_posted': self.date_posted, 'language': self.language, 'user_id': self.user_id}
+    
+    def __repr__(self):
+        return f'id: {self.id}, title: {self.title}, date_posted: {self.date_posted}, language: {self.language}, user_id: {self.user_id}, content: {self.content}'
 
     def __init__(self, title, content, language, user_id):
         self.title = title

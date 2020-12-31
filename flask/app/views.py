@@ -82,6 +82,22 @@ def upload():
         return jsonify({'message': 'Missing upload'}), 403
     except:
         return jsonify({'message': 'Invalid upload'}), 403
+    
+    
+@app.route('/files', methods=['GET'])
+@authenticateToken
+def files():
+    user_data = getProfileFromToken(request)
+    user_id = User.query.filter_by(email=user_data['user']).first().id
+    try:
+        if user_id:
+            files = CodeFile.query.filter_by(user_id = user_id).all()
+            print(files)
+            return jsonify({'message': 'Success'})
+        return jsonify({'message': 'Missing upload'}), 403
+    except:
+        return jsonify({'message': 'Invalid upload'}), 403
+
 
 # All routes below left for api testing
 
