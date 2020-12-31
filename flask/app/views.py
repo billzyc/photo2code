@@ -59,13 +59,29 @@ def testauth():
     user_data = getProfileFromToken(request)
     return jsonify({'user_data': user_data})
 
-
-@app.route('/logout')
-def logout():
-    for key in list(session.keys()):
-        session.pop(key)
-    return redirect('/')
-
+@app.route('/upload', methods=['POST'])
+@authenticateToken
+def upload():
+    file_name = request.values['name']
+    image = request.files['image']
+    language = request.values['language']
+    user_data = getProfileFromToken(request)
+    user_id = User.query.filter_by(email=user_data['user']).first().id
+    try:
+        if file_name and user_id and language and image is not None:
+            text = get_image_text(image)
+            new_file = CodeFile(
+                title=file_name,
+                content=text,
+                language=language,
+                user_id=user_id,
+            )
+            db.session.add(new_file)
+            db.session.commit()
+            return jsonify({'message': 'Success'})
+        return jsonify({'message': 'Missing upload'}), 403
+    except:
+        return jsonify({'message': 'Invalid upload'}), 403
 
 # All routes below left for api testing
 
@@ -147,3 +163,9 @@ def test_upload_image():
                 return 'uploaded'
         return render_template('public/upload_image.html')
     return 'please login'
+
+@app.route('/logout')
+def logout():
+    for key in list(session.keys()):
+        session.pop(key)
+    return redirect('/')

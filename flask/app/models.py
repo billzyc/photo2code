@@ -17,7 +17,7 @@ class User(db.Model):
         self.last_name = last_name
 
     def __repr__(self):
-        return f'User id: {id} email:{email}'
+        return f'User id: {self.id} email:{self.email}'
 
     def profileMap(self):
         return {
