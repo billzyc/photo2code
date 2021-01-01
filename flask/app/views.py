@@ -52,12 +52,13 @@ def googleSignin():
         return make_response('Unable to verify', 403, {'WWW-Authenticate': 'login error'})
 
 
-@app.route('/profile', methods=['POST'])
+@app.route('/profile', methods=['GET'])
 @authenticateToken
 def testauth():
-    # TODO return actual profile info
     user_data = getProfileFromToken(request)
-    return jsonify({'user_data': user_data})
+    print(user_data)
+    user_profile = User.query.filter_by(email=user_data['user']).first()
+    return jsonify({'user_profile': user_profile.getMap()})
 
 @app.route('/upload', methods=['POST'])
 @authenticateToken
@@ -127,7 +128,7 @@ def authorize():
         )
         db.session.add(user_profile)
         db.session.commit()
-    session['profile'] = user_profile.profileMap()
+    session['profile'] = user_profile.getMap()
     session.permanent = (
         True  # make the session permanant so it keeps existing after broweser gets closed
     )
