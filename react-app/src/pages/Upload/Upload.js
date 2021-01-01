@@ -1,6 +1,6 @@
-import UploadFrom from '../../components/uploadForm/uploadForm'
+import UploadFrom from '../../components/UploadForm/UploadForm'
 
-import "./upload.scss";
+import "./Upload.scss";
 
 function Upload() {
 

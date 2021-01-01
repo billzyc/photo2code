@@ -1,4 +1,4 @@
-import "./landing.scss";
+import "./Landing.scss";
 import codeReviewSvg from "../../assets/svg/codeReview.svg";
 
 function Landing() {

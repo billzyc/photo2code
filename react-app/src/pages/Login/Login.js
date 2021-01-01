@@ -1,7 +1,7 @@
 import { CookiesProvider } from "react-cookie";
 
-import "./login.scss";
-import GoogleOAuth from "../../components/googleOAuth/googleOAuth.js";
+import "./Login.scss";
+import GoogleOAuth from "../../components/GoogleOAuth/GoogleOAuth.js";
 
 function Login() {
   return (

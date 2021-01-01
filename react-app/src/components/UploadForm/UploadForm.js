@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 
-import "./uploadForm.scss";
+import "./UploadForm.scss";
 
 function UploadForm() {
   const [fileLanguage, setFileLanguage] = useState("");
