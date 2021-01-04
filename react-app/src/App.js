@@ -1,5 +1,4 @@
 import { CookiesProvider } from "react-cookie";
-import { Route, BrowserRouter as Router } from "react-router-dom";
 
 import "./App.scss";
 import Login from "./pages/Login/Login.js";
@@ -12,18 +11,15 @@ import FilesContextProvider from "./contexts/FilesContext";
 function App() {
   return (
     <div className="app">
-      <Router>
-        <CookiesProvider>
-          <UserContextProvider>
-            <FilesContextProvider>
-              <Route path="/" component={NavBar} />
-              <Route path="/" exact component={Landing} />
-              <Route path="/login" component={Login} />
-              <Route path="/upload" component={Upload} />
-            </FilesContextProvider>
-          </UserContextProvider>
-        </CookiesProvider>
-      </Router>
+      <CookiesProvider>
+        <UserContextProvider>
+          <FilesContextProvider>
+            <NavBar />
+            <Landing />
+            <Upload />
+          </FilesContextProvider>
+        </UserContextProvider>
+      </CookiesProvider>
     </div>
   );
 }
