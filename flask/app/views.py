@@ -56,7 +56,6 @@ def googleSignin():
 @authenticateToken
 def testauth():
     user_data = getProfileFromToken(request)
-    print(user_data)
     user_profile = User.query.filter_by(email=user_data['user']).first()
     return jsonify({'user_profile': user_profile.getMap()})
 
@@ -93,7 +92,6 @@ def files():
     try:
         if user_id:
             files = CodeFile.query.filter_by(user_id = user_id).all()
-            print(files)
             return jsonify({'message': 'Success'})
         return jsonify({'message': 'Missing upload'}), 403
     except:
