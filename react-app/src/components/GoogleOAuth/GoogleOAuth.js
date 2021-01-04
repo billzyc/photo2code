@@ -22,7 +22,11 @@ function GoogleOAuth() {
     );
 
     const data = await apiResponse.json();
-    setCookie("token", data.token, { path: "/" });
+
+    let expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 16);
+    //TODO: add secure for cookies after site is hosted
+    setCookie("token", data.token, { path: "/", expires: expirationDate, sameSite: true });
   };
 
   const onFail = () => {
@@ -31,7 +35,7 @@ function GoogleOAuth() {
 
   return (
     <GoogleLogin
-    className="login-button"
+      className="login-button"
       clientId={clientId}
       buttonText="login!"
       onSuccess={onSuccess}
