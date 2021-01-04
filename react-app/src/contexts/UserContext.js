@@ -4,12 +4,15 @@ export const UserContext = createContext();
 
 class UserContextProvider extends Component{
     state ={
-        email: '',
-        firstName: '',
-        lastName: '',
+        userEmail: 'hi',
+        userFirstName: '',
+        userLastName: '',
+        userID:''
     }
 
     updateUserContext = (userProfile) =>{
+        const newState = {...this.state, ...userProfile}
+        console.log(newState)
         this.setState({...this.state, ...userProfile})
     } 
 

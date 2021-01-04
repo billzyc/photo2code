@@ -7,11 +7,6 @@ import { useCookies } from "react-cookie";
 import "./NavBar.scss";
 
 function NavBar() {
-  const { email, updateUserContext } = useContext(UserContext);
-  const { files, updateFiles } = useContext(FilesContext);
-  const [cookies, setCookie] = useCookies(["token"]);
-
-
   return (
     <div className="navBar">
       <h2>Photo2Code</h2>
