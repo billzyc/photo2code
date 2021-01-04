@@ -1,10 +1,14 @@
+import React, { useContext } from "react";
 import GoogleLogin from "react-google-login";
 import { useCookies } from "react-cookie";
 
 import "./GoogleOAuth.scss";
+import { UserContext } from "../../contexts/UserContext";
+import getProfile from "../../utils/getProfile";
 
 function GoogleOAuth() {
   const [cookies, setCookie] = useCookies(["token"]);
+  const { updateUserContext } = useContext(UserContext);
 
   const clientId =
     "681258670642-cdmnl2u2f679khc07railjprdct59n66.apps.googleusercontent.com";
@@ -26,7 +30,13 @@ function GoogleOAuth() {
     let expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 16);
     //TODO: add secure for cookies after site is hosted
-    setCookie("token", data.token, { path: "/", expires: expirationDate, sameSite: true });
+    setCookie("token", data.token, {
+      path: "/",
+      expires: expirationDate,
+      sameSite: true,
+    });
+
+    getProfile(data.token, updateUserContext);
   };
 
   const onFail = () => {
