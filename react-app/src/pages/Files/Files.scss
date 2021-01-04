@@ -1,2 +1,22 @@
-@import '../../styles/shared.scss';
+@import "../../styles/shared.scss";
 
+.files {
+  $camera-bar-height: 65px;
+  padding-bottom: $camera-bar-height;
+  .camera-bar-container {
+    position: absolute;
+    bottom: 0;
+    height: $camera-bar-height;
+    width: 100%;
+  }
+}
+
+@include breakpoint(desktopSm) {
+  $camera-bar-height: 0px;
+  .files {
+    padding-bottom: $camera-bar-height;
+    .camera-bar-container {
+      display: none;
+    }
+  }
+}
