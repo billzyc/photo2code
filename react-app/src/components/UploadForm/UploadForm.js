@@ -23,10 +23,10 @@ function UploadForm() {
     formData.append("name", fileName);
     formData.append("language", fileLanguage);
 
-    const res = await fetch("http://127.0.0.1:5001/upload", {
+    const res = await fetch("http://127.0.0.1:5000/upload", {
       method: "POST",
       headers: {
-        "Jwt": cookies.token
+        Jwt: cookies.token,
       },
       body: formData,
     });
