@@ -1,3 +1,5 @@
 flask/env/
 *.pyc
 __pycache__
+photo2code-secret.json
+react-app/.eslintcache

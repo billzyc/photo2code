@@ -1,0 +1,8 @@
+@import 'layout.scss';
+
+$layout-mobile: map-get($layout, mobile) + px;
+$layout-tablet: map-get($layout, tablet) + px;
+$layout-desktopSm: map-get($layout, desktopSm) + px;
+$layout-desktopMd: map-get($layout, desktopMd) + px;
+$layout-desktopLg: map-get($layout, desktopLg) + px;
+

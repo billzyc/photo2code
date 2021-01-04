@@ -31,7 +31,8 @@ class User(db.Model):
 class CodeFile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    date_posted = db.Column(db.DateTime, nullable=False,
+                            default=datetime.utcnow)
     content = db.Column(db.Text, nullable=True)
     language = db.Column(db.String(50), nullable=False)
     # image_file = db.Column(db.String(20), nullable=False)
