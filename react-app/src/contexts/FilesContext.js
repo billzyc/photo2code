@@ -4,11 +4,11 @@ export const FilesContext = createContext();
 
 class FilesContextProvider extends Component{
     state ={
-        files: []
+        userFiles: []
     }
 
     updateFiles = (files) =>{
-        this.setState({files: [...files]})
+        this.setState({userFiles: [...files]})
     } 
 
     render(){

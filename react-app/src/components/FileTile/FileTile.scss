@@ -1,0 +1,10 @@
+@import "../../styles/shared.scss";
+
+.file-tile {
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  border: 1px;
+  border-style: solid;
+  border-color: black;
+}

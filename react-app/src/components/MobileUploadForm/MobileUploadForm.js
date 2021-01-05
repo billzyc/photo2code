@@ -1,13 +1,16 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 
 import "./MobileUploadForm.scss";
-import closeSVG from '../../assets/svg/close.svg';
+import closeSVG from "../../assets/svg/close.svg";
+import getFiles from "../../utils/getFiles";
+import { FilesContext } from "../../contexts/FilesContext";
 
-const MobileUploadForm = ({setIsMobileUploadOpen}) =>{
+const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
   const [fileLanguage, setFileLanguage] = useState("");
   const [fileName, setFileName] = useState("");
+  const { updateFiles } = useContext(FilesContext);
   const [cookies] = useCookies(["token"]);
 
   const onNameChange = (e) => {
@@ -42,13 +45,21 @@ const MobileUploadForm = ({setIsMobileUploadOpen}) =>{
       body: formData,
     });
 
-    const apiResponse = await res.json();
-    console.log(apiResponse);
+    if (res.ok) {
+      getFiles(cookies.token, updateFiles);
+    }
   };
 
   return (
     <div className="form">
-      <img className="form-close" src={closeSVG} alt="close" onClick={()=>{setIsMobileUploadOpen(false)}}/>
+      <img
+        className="form-close"
+        src={closeSVG}
+        alt="close"
+        onClick={() => {
+          setIsMobileUploadOpen(false);
+        }}
+      />
       <input
         type="text"
         onChange={(e) => {
@@ -83,6 +94,6 @@ const MobileUploadForm = ({setIsMobileUploadOpen}) =>{
       </form> */}
     </div>
   );
-}
+};
 
 export default MobileUploadForm;

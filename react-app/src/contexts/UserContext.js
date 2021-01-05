@@ -12,7 +12,6 @@ class UserContextProvider extends Component{
 
     updateUserContext = (userProfile) =>{
         const newState = {...this.state, ...userProfile}
-        console.log(newState)
         this.setState({...this.state, ...userProfile})
     } 
 

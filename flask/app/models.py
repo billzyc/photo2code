@@ -39,7 +39,7 @@ class CodeFile(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
     def getMap(self):
-        return {'id': self.id, 'title': self.title, 'date_posted': self.date_posted, 'language': self.language, 'user_id': self.user_id}
+        return {'id': self.id, 'title': self.title, 'date_posted': self.date_posted, 'language': self.language, 'user_id': self.user_id, 'content': self.content}
     
     def __repr__(self):
         return f'id: {self.id}, title: {self.title}, date_posted: {self.date_posted}, language: {self.language}, user_id: {self.user_id}, content: {self.content}'

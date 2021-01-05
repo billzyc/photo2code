@@ -4,11 +4,13 @@ import { useCookies } from "react-cookie";
 
 import "./GoogleOAuth.scss";
 import { UserContext } from "../../contexts/UserContext";
-import getProfile from "../../utils/getProfile";
+import getUserInformation from "../../utils/getUserInformation";
+import { FilesContext } from "../../contexts/FilesContext";
 
 function GoogleOAuth() {
   const [cookies, setCookie] = useCookies(["token"]);
   const { updateUserContext } = useContext(UserContext);
+  const { updateFiles } = useContext(FilesContext);
 
   const clientId =
     "681258670642-cdmnl2u2f679khc07railjprdct59n66.apps.googleusercontent.com";
@@ -36,7 +38,7 @@ function GoogleOAuth() {
       sameSite: true,
     });
 
-    getProfile(data.token, updateUserContext);
+    getUserInformation(data.token, updateUserContext, updateFiles);
   };
 
   const onFail = () => {

@@ -102,6 +102,26 @@ def files():
         return jsonify({'message': 'Request error'}), 403
 
 
+# @app.route('/download-file', methods=['POST'])
+# @authenticateToken
+# def download_file():
+#     user_data = getProfileFromToken(request)
+#     user_id = User.query.filter_by(email=user_data['user']).first().id
+#     if user_id:
+#         file_id = request.json['fileID']
+#         print(user_id, file_id)
+#         file_data = CodeFile.query.filter_by(
+#             user_id=user_id, id=file_id).first()
+#         if file_data != None:
+#             return send_file(
+#                 BytesIO(bytes(file_data.content, 'utf-8')),
+#                 attachment_filename=f'{file_data.title}.{file_data.language}',
+#                 as_attachment=True,
+#             )
+#         else:
+#             return jsonify({'message': 'No File Exists'}), 403
+#     return jsonify({'message': 'Authentication Error'}), 403
+
 # All routes below left for api testing
 
 
