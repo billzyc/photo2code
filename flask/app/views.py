@@ -59,6 +59,7 @@ def testauth():
     user_profile = User.query.filter_by(email=user_data['user']).first()
     return jsonify({'user_profile': user_profile.getMap()})
 
+
 @app.route('/upload', methods=['POST'])
 @authenticateToken
 def upload():
@@ -82,8 +83,8 @@ def upload():
         return jsonify({'message': 'Missing upload'}), 403
     except:
         return jsonify({'message': 'Invalid upload'}), 403
-    
-    
+
+
 @app.route('/files', methods=['GET'])
 @authenticateToken
 def files():
@@ -91,11 +92,14 @@ def files():
     user_id = User.query.filter_by(email=user_data['user']).first().id
     try:
         if user_id:
-            files = CodeFile.query.filter_by(user_id = user_id).all()
-            return jsonify({'message': 'Success'})
-        return jsonify({'message': 'Missing upload'}), 403
+            files = CodeFile.query.filter_by(user_id=user_id).all()
+            data = []
+            for file in files:
+                data.append(file.getMap())
+            return jsonify({'files': data})
+        return jsonify({'message': 'Missing User Information'}), 403
     except:
-        return jsonify({'message': 'Invalid upload'}), 403
+        return jsonify({'message': 'Request error'}), 403
 
 
 # All routes below left for api testing
@@ -178,6 +182,7 @@ def test_upload_image():
                 return 'uploaded'
         return render_template('public/upload_image.html')
     return 'please login'
+
 
 @app.route('/logout')
 def logout():
