@@ -45,8 +45,11 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
       body: formData,
     });
 
+    //TODO: Add success, fail and loading states
+
     if (res.ok) {
       getFiles(cookies.token, updateFiles);
+      setIsMobileUploadOpen(false);
     }
   };
 
