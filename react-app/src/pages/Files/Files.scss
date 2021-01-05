@@ -3,11 +3,29 @@
 .files {
   $camera-bar-height: 65px;
   padding-bottom: $camera-bar-height;
+
+  .mobile-upload-form-container,
   .camera-bar-container {
-    position: absolute;
+    position: Fixed;
+
+    width: 100%;
+  }
+  .camera-bar-container {
     bottom: 0;
     height: $camera-bar-height;
-    width: 100%;
+  }
+
+  .mobile-upload-form-container {
+    bottom: calc(#{-$mobile-upload-height} - 115px);
+    transition: all 500ms ease-in-out;
+
+    &.active {
+      bottom: 0;
+      transition: all 500ms ease-in-out;
+    }
+    // animation-name: mobileUploadForm;
+    // animation-duration: 0.5s;
+    // animation-timing-function: ease-in-out;
   }
 }
 
@@ -15,8 +33,18 @@
   $camera-bar-height: 0px;
   .files {
     padding-bottom: $camera-bar-height;
-    .camera-bar-container {
+    .camera-bar-container,
+    .mobile-upload-form-container {
       display: none;
     }
   }
 }
+
+// @keyframes mobileUploadForm {
+//   from {
+//     bottom: -$mobile-upload-form-height;
+//   }
+//   to {
+//     bottom: 0;
+//   }
+// }

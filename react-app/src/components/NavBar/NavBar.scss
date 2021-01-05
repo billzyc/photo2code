@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: space-between;
   border-radius: 20;
-  box-shadow: $softShadow
+  box-shadow: $soft-shadow
 }
 
 @include breakpoint(desktopSm) {

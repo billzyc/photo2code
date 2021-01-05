@@ -1,0 +1,24 @@
+@import "../../styles/shared.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 42px;
+  padding-top: 60px;
+  height: $mobile-upload-height;
+  background-color: white;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: $soft-shadow;
+
+  .form-close{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  .real-camera-input {
+    display: none;
+  }
+}

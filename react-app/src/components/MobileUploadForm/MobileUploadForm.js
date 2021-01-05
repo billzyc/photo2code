@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 
-import "./UploadForm.scss";
+import "./MobileUploadForm.scss";
+import closeSVG from '../../assets/svg/close.svg';
 
-function UploadForm() {
+const MobileUploadForm = ({setIsMobileUploadOpen}) =>{
   const [fileLanguage, setFileLanguage] = useState("");
   const [fileName, setFileName] = useState("");
   const [cookies] = useCookies(["token"]);
-  const { register, handleSubmit } = useForm();
 
   const onNameChange = (e) => {
     setFileName(e.currentTarget.value);
@@ -17,9 +17,20 @@ function UploadForm() {
   const onLanguageChange = (e) => {
     setFileLanguage(e.currentTarget.value);
   };
-  const onSubmit = async (data) => {
+
+  const hiddenFileInput = useRef(null);
+  const onFakeCameraClick = (event) => {
+    hiddenFileInput.current.click();
+  };
+
+  const onRealCameraChange = (event) => {
+    const uploadedFile = event.target.files[0];
+    submitImage(uploadedFile);
+  };
+
+  const submitImage = async (image) => {
     const formData = new FormData();
-    formData.append("image", data.picture[0]);
+    formData.append("image", image);
     formData.append("name", fileName);
     formData.append("language", fileLanguage);
 
@@ -37,6 +48,7 @@ function UploadForm() {
 
   return (
     <div className="form">
+      <img className="form-close" src={closeSVG} alt="close" onClick={()=>{setIsMobileUploadOpen(false)}}/>
       <input
         type="text"
         onChange={(e) => {
@@ -51,13 +63,26 @@ function UploadForm() {
         }}
         placeholder="Language"
       />
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <button className="fake-camera-input" onClick={onFakeCameraClick}>
+        Next
+      </button>
+
+      <input
+        ref={hiddenFileInput}
+        onChange={onRealCameraChange}
+        className="real-camera-input"
+        type="file"
+        id="imageFile"
+        capture="user"
+        accept="image/*"
+      ></input>
+      {/* <form onSubmit={handleSubmit(onSubmit)}>
         <input ref={register} type="file" name="picture" />
 
         <button>Submit</button>
-      </form>
+      </form> */}
     </div>
   );
 }
 
-export default UploadForm;
+export default MobileUploadForm;
