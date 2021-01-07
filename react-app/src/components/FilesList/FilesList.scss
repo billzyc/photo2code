@@ -23,3 +23,9 @@
     }
   }
 }
+
+@include breakpoint(desktopSm) {
+  .mobile-phone-img {
+    width: 500px;
+  }
+}
