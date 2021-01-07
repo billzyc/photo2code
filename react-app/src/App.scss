@@ -1,7 +1,7 @@
+@import "styles/shared.scss";
 
-@import 'styles/shared.scss';
-
-.app{
-    width: 100vw;
-    height: 100vh;
+.app {
+  .app-content {
+    padding-top: calc(#{$nav-bar-height} + #{$nav-bar-vertical-padding});
+  }
 }

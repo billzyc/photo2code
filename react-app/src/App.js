@@ -28,13 +28,15 @@ function App() {
   return (
     <div className="app">
       <NavBar />
-      {isLoading ? (
-        <ClipLoader size={150} />
-      ) : userEmail && userID ? (
-        <Files />
-      ) : (
-        <Landing />
-      )}
+      <div className="app-content">
+        {isLoading ? (
+          <ClipLoader size={150} />
+        ) : userEmail && userID ? (
+          <Files />
+        ) : (
+          <Landing />
+        )}
+      </div>
     </div>
   );
 }

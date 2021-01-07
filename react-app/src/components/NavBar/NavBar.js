@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
-import { FilesContext } from "../../contexts/FilesContext";
 import { UserContext } from "../../contexts/UserContext";
 import GoogleOAuth from "../GoogleOAuth/GoogleOAuth";
-import { useCookies } from "react-cookie";
 
 import "./NavBar.scss";
+import Profile from "../Profile/Profile";
 
 function NavBar() {
+  const { userEmail, userID } = useContext(UserContext);
   return (
     <div className="navBar">
-      <h2>Photo2Code</h2>
-      <GoogleOAuth />
+      <h3>{"<Photo2Code>"}</h3>
+      {userEmail && userID ? <Profile /> : <GoogleOAuth />}
     </div>
   );
 }

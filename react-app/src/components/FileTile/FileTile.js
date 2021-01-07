@@ -3,6 +3,7 @@ import { useCookies } from "react-cookie";
 import "./FileTile.scss";
 
 import downloadSVG from "../../assets/svg/download.svg";
+import fileSVG from "../../assets/svg/file.svg";
 
 const FileTile = ({ file }) => {
   const [cookies, setCookie] = useCookies(["token"]);
@@ -31,8 +32,17 @@ const FileTile = ({ file }) => {
 
   return (
     <div className="file-tile">
-      <p>{`${file.title}.${file.language}`}</p>
-      <img src={downloadSVG} alt="download" onClick={downloadFile} />
+      <div className="tile-content">
+        <div className="tile-title">
+          <img src={fileSVG} alt="file" />
+          <p>{`${file.title}.${file.language}`}</p>
+        </div>
+
+        <div className="tile-buttons">
+          <img src={downloadSVG} alt="download" onClick={downloadFile} />
+        </div>
+      </div>
+      <hr className="tile-divider" />
     </div>
   );
 };

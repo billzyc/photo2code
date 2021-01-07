@@ -1,12 +1,16 @@
 @import "../../styles/shared.scss";
 
 .navBar {
+  position: fixed;
   width: 100%;
+  height: $nav-bar-height;
+  background-color: white;
+  padding: calc(#{$nav-bar-vertical-padding} / 2);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 20;
-  box-shadow: $soft-shadow
+  box-shadow: $soft-shadow;
+  z-index: 1;
 }
 
 @include breakpoint(desktopSm) {

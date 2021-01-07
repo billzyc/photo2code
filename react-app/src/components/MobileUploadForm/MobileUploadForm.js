@@ -65,6 +65,7 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
       />
       <input
         type="text"
+        className="text-input"
         onChange={(e) => {
           onNameChange(e);
         }}
@@ -72,6 +73,7 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
       />
       <input
         type="text"
+        className="text-input"
         onChange={(e) => {
           onLanguageChange(e);
         }}
