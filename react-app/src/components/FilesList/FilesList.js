@@ -9,7 +9,6 @@ const FilesList = () => {
 
   const renderFileTiles = () => {
     const fileTiles = [];
-    console.log(userFiles);
     userFiles.forEach((file) => {
       fileTiles.push(<FileTile file={file} />);
     });

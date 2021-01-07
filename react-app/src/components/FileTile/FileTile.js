@@ -6,7 +6,6 @@ import downloadSVG from "../../assets/svg/download.svg";
 
 const FileTile = ({ file }) => {
   const [cookies, setCookie] = useCookies(["token"]);
-  console.log(file);
 
   const downloadFile = async () => {
     // const requestOptions = {
