@@ -2,15 +2,13 @@
 
 
 ## Flask:  
-For local development:
-1) Navigate to the flask folder  
+
+First time local development set up:
+
+1)
 `cd flask/`  
 `python3 -m venv env`  
 `cd ..`  
-
-
-
-2) run   
 `pip3 install autoenv==1.0.0`  
 ``echo "source `which activate.sh`" >> ~/.bashrc``
 `source ~/.bashrc`
@@ -19,14 +17,14 @@ For local development:
 
 4) Run dev server  
 `cd flask/`  
-
-To manually activate the virtual environment:
-`source env/bin/activate`
-
 `pip3 install -r requirements.txt`  
-Set Google Client Id/Secret environment variable.  
+Set Google Client Id/Secret environment variable (See section below).  
 `python3 manage.py db upgrade`  
 `flask run`  
+
+
+To manually activate the virtual environment:
+`source env/bin/activate`  
 
 ## Docker:  
 Build services:
