@@ -58,7 +58,11 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
     const dropDown = [];
 
     Object.keys(languages).forEach((language) => {
-      dropDown.push(<option value={language}>{language}</option>);
+      dropDown.push(
+        <option key={language} value={language}>
+          {language}
+        </option>
+      );
     });
 
     dropDown.push();
@@ -82,7 +86,13 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
         }}
         placeholder="File Name"
       />
-      <select id="languages" className={`${fileExtension? null : 'empty'}`} name="languages" required onChange={onLanguageChange}>
+      <select
+        id="languages"
+        className={`${fileExtension ? null : "empty"}`}
+        name="languages"
+        required
+        onChange={onLanguageChange}
+      >
         <option disabled value="" selected hidden>
           Language
         </option>
@@ -97,7 +107,13 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
         placeholder="Language"
       /> */}
 
-      <button className={`fake-camera-input ${fileName && fileExtension ? null: 'disabled'}`} onClick={onFakeCameraClick} disabled={fileName && fileExtension ? false: true}>
+      <button
+        className={`fake-camera-input ${
+          fileName && fileExtension ? null : "disabled"
+        }`}
+        onClick={onFakeCameraClick}
+        disabled={fileName && fileExtension ? false : true}
+      >
         Next
       </button>
 
