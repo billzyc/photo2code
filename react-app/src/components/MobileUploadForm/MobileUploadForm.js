@@ -9,7 +9,7 @@ import { FilesContext } from "../../contexts/FilesContext";
 import { languages } from "../../consts/languages";
 
 const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
-  const [fileLanguage, setFileLanguage] = useState("");
+  const [fileExtension, setFileExtension] = useState("");
   const [fileName, setFileName] = useState("");
   const { updateFiles } = useContext(FilesContext);
   const [cookies] = useCookies(["token"]);
@@ -19,7 +19,7 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
   };
 
   const onLanguageChange = (e) => {
-    setFileLanguage(e.target.value);
+    setFileExtension(languages[e.target.value]);
   };
 
   const hiddenFileInput = useRef(null);
@@ -36,7 +36,7 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
     const formData = new FormData();
     formData.append("image", image);
     formData.append("name", fileName);
-    formData.append("language", fileLanguage);
+    formData.append("extension", fileExtension);
 
     const res = await fetch("http://127.0.0.1:5000/upload", {
       method: "POST",
@@ -82,7 +82,7 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
         }}
         placeholder="File Name"
       />
-      <select id="languages" className={`${fileLanguage? null : 'empty'}`} name="languages" required onChange={onLanguageChange}>
+      <select id="languages" className={`${fileExtension? null : 'empty'}`} name="languages" required onChange={onLanguageChange}>
         <option disabled value="" selected hidden>
           Language
         </option>
@@ -97,7 +97,7 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
         placeholder="Language"
       /> */}
 
-      <button className={`fake-camera-input ${fileName && fileLanguage ? null: 'disabled'}`} onClick={onFakeCameraClick} disabled={fileName && fileLanguage ? false: true}>
+      <button className={`fake-camera-input ${fileName && fileExtension ? null: 'disabled'}`} onClick={onFakeCameraClick} disabled={fileName && fileExtension ? false: true}>
         Next
       </button>
 

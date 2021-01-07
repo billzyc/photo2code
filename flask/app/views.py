@@ -57,7 +57,9 @@ def googleSignin():
 def testauth():
     user_data = getProfileFromToken(request)
     user_profile = User.query.filter_by(email=user_data['user']).first()
-    return jsonify({'user_profile': user_profile.getMap()})
+    if user_profile:
+        return jsonify({'user_profile': user_profile.getMap()})
+    return jsonify({'message': 'No profiles exist'}), 403
 
 
 @app.route('/upload', methods=['POST'])
@@ -65,16 +67,16 @@ def testauth():
 def upload():
     file_name = request.values['name']
     image = request.files['image']
-    language = request.values['language']
+    extension = request.values['extension']
     user_data = getProfileFromToken(request)
     user_id = User.query.filter_by(email=user_data['user']).first().id
     try:
-        if file_name and user_id and language and image is not None:
+        if file_name and user_id and extension and image is not None:
             text = get_image_text(image)
             new_file = CodeFile(
                 title=file_name,
                 content=text,
-                language=language,
+                extension=extension,
                 user_id=user_id,
             )
             db.session.add(new_file)
@@ -115,7 +117,7 @@ def files():
 #         if file_data != None:
 #             return send_file(
 #                 BytesIO(bytes(file_data.content, 'utf-8')),
-#                 attachment_filename=f'{file_data.title}.{file_data.language}',
+#                 attachment_filename=f'{file_data.title}.{file_data.extension}',
 #                 as_attachment=True,
 #             )
 #         else:
@@ -172,7 +174,7 @@ def test_get_file():
         if file_data != None:
             return send_file(
                 BytesIO(bytes(file_data.content, 'utf-8')),
-                attachment_filename=f'{file_data.title}.{file_data.language}',
+                attachment_filename=f'{file_data.title}.{file_data.extension}',
                 as_attachment=True,
             )
         else:
@@ -189,12 +191,12 @@ def test_upload_image():
             if request.files and user_id != None:
                 file_name = request.values['title']
                 image = request.files['image']
-                language = request.values['language']
+                extension = request.values['extension']
                 text = get_image_text(image)
                 new_file = CodeFile(
                     title=file_name,
                     content=text,
-                    language=language,
+                    extension=extension,
                     user_id=user_id,
                 )
                 db.session.add(new_file)

@@ -25,7 +25,7 @@ const FileTile = ({ file }) => {
       type: "text/plain;charset=utf-8",
     });
     element.href = URL.createObjectURL(download);
-    element.download = `${file.title}.${file.language}`;
+    element.download = `${file.title}.${file.extension}`;
     document.body.appendChild(element);
     element.click();
   };
@@ -35,7 +35,7 @@ const FileTile = ({ file }) => {
       <div className="tile-content">
         <div className="tile-title">
           <img src={fileSVG} alt="file" />
-          <p>{`${file.title}.${file.language}`}</p>
+          <p>{`${file.title}.${file.extension}`}</p>
         </div>
 
         <div className="tile-buttons">
