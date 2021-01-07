@@ -6,6 +6,7 @@ import "./MobileUploadForm.scss";
 import closeSVG from "../../assets/svg/close.svg";
 import getFiles from "../../utils/getFiles";
 import { FilesContext } from "../../contexts/FilesContext";
+import { languages } from "../../consts/languages";
 
 const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
   const [fileLanguage, setFileLanguage] = useState("");
@@ -18,7 +19,7 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
   };
 
   const onLanguageChange = (e) => {
-    setFileLanguage(e.currentTarget.value);
+    setFileLanguage(e.target.value);
   };
 
   const hiddenFileInput = useRef(null);
@@ -53,6 +54,16 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
     }
   };
 
+  const renderLanguageDropDown = () => {
+    const dropDown = [];
+
+    Object.keys(languages).forEach((language) => {
+      dropDown.push(<option value={language}>{language}</option>);
+    });
+
+    dropDown.push();
+    return dropDown;
+  };
   return (
     <div className="form">
       <img
@@ -71,15 +82,22 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
         }}
         placeholder="File Name"
       />
-      <input
+      <select id="languages" className={`${fileLanguage? null : 'empty'}`} name="languages" required onChange={onLanguageChange}>
+        <option disabled value="" selected hidden>
+          Language
+        </option>
+        {renderLanguageDropDown()}
+      </select>
+      {/* <input
         type="text"
         className="text-input"
         onChange={(e) => {
           onLanguageChange(e);
         }}
         placeholder="Language"
-      />
-      <button className="fake-camera-input" onClick={onFakeCameraClick}>
+      /> */}
+
+      <button className={`fake-camera-input ${fileName && fileLanguage ? null: 'disabled'}`} onClick={onFakeCameraClick} disabled={fileName && fileLanguage ? false: true}>
         Next
       </button>
 

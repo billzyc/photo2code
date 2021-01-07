@@ -27,15 +27,25 @@
     width: 150px;
     height: 40px;
     border-radius: 10px;
-    border: 1px lightgrey solid;
+    border: 1px lightblue solid;
+
+    &.disabled{
+      border-color: lightgrey;
+    }
   }
 
-  .text-input{
+  >.text-input, #languages{
     border: 1px lightgrey solid;
     border-radius: 10px;
     width: 80%;
     height: 50px;
     padding: 10px;
     margin-bottom: 30px;
+    background-color: white;
+
+    &.empty{
+      color: grey;
+    }
   }
+
 }
