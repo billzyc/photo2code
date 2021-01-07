@@ -23,8 +23,17 @@ Set Google Client Id/Secret environment variable (See section below).
 `flask run`  
 
 
+
+Misc:  
+
 To manually activate the virtual environment:
 `source env/bin/activate`  
+
+Running file migrations:  
+`cd flask`  
+To initialize Alembic - `python3 manage.py db init`  
+Create migration - `python3 manage.py db migrate`  
+Apply upgrades - `python3 manage.py db upgrade`  
 
 ## Docker:  
 Build services:
