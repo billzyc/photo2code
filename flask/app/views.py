@@ -65,12 +65,12 @@ def testauth():
 @app.route('/upload', methods=['POST'])
 @authenticateToken
 def upload():
-    file_name = request.values['name']
-    image = request.files['image']
-    extension = request.values['extension']
-    user_data = getProfileFromToken(request)
-    user_id = User.query.filter_by(email=user_data['user']).first().id
     try:
+        file_name = request.values['name']
+        image = request.files['image']
+        extension = request.values['extension']
+        user_data = getProfileFromToken(request)
+        user_id = User.query.filter_by(email=user_data['user']).first().id
         if file_name and user_id and extension and image is not None:
             text = get_image_text(image)
             new_file = CodeFile(
@@ -86,13 +86,30 @@ def upload():
     except:
         return jsonify({'message': 'Invalid upload'}), 403
 
+@app.route('/delete_file', methods=['POST'])
+@authenticateToken
+def deleteFile():
+    try:
+        file_id = request.json['fileID']
+        user_data = getProfileFromToken(request)
+        user_id = User.query.filter_by(email=user_data['user']).first().id
+        if file_id and user_id :
+            target_file = CodeFile.query.filter_by(user_id=user_id, id= file_id).first()
+            db.session.delete(target_file)
+            db.session.commit()
+            return jsonify({'message': 'Success'})
+        return jsonify({'message': 'Missing user or file information'}), 403
+    except:
+        return jsonify({'message': 'Request Error'}), 403
+
+
 
 @app.route('/files', methods=['GET'])
 @authenticateToken
 def files():
-    user_data = getProfileFromToken(request)
-    user_id = User.query.filter_by(email=user_data['user']).first().id
     try:
+        user_data = getProfileFromToken(request)
+        user_id = User.query.filter_by(email=user_data['user']).first().id
         if user_id:
             files = CodeFile.query.filter_by(user_id=user_id).all()
             data = []
