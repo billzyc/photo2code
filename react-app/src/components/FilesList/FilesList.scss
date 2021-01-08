@@ -11,7 +11,9 @@
     max-width: 1440px;
 
     .files-list-header {
+      margin-left: $file-tile-padding;
       margin-right: 100%;
+      margin-bottom: 20px;
     }
 
     .mobile-phone-img {

@@ -5,10 +5,12 @@
   $maxWidth: 1440px;
 
   width: 100%;
+  padding: 0 15px;
   max-width: $maxWidth;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  background-color: white;
 
   .tile-content {
     display: flex;
