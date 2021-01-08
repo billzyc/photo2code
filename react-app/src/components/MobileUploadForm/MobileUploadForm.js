@@ -90,10 +90,11 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
         id="languages"
         className={`${fileExtension ? null : "empty"}`}
         name="languages"
+        defaultValue=""
         required
         onChange={onLanguageChange}
       >
-        <option disabled value="" selected hidden>
+        <option disabled value="" hidden>
           Language
         </option>
         {renderLanguageDropDown()}
