@@ -30,6 +30,7 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
   const onRealCameraChange = (event) => {
     const uploadedFile = event.target.files[0];
     submitImage(uploadedFile);
+    event.target.value = null;
   };
 
   const submitImage = async (image) => {
