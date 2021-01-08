@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import "./CameraBar.scss";
 
-import cameraSVG from "../../assets/svg/cameraEnhance.svg";
+import cameraSVG from "../../assets/svg/cameraIcon.svg";
 
 const CameraBar = ({ setIsMobileUploadOpen }) => {
   return (
