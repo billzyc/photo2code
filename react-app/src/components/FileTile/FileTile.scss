@@ -2,7 +2,7 @@
 
 .file-tile {
   $file-icon-width: 35px;
-  $maxWidth:  1440px;
+  $maxWidth: 1440px;
 
   width: 100%;
   max-width: $maxWidth;
@@ -21,7 +21,7 @@
       display: flex;
       align-items: center;
 
-      > p{
+      > p {
         word-break: break-all;
       }
 
@@ -37,6 +37,10 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
+
+      > img {
+        padding-right: 10px;
+      }
     }
   }
 
@@ -44,11 +48,10 @@
     display: block;
     height: 1px;
     border: 0;
-    width: calc(100% - calc( #{$file-icon-width}));
-    max-width: calc(#{$maxWidth} - calc( #{$file-icon-width}));
+    width: calc(100% - calc(#{$file-icon-width}));
+    max-width: calc(#{$maxWidth} - calc(#{$file-icon-width}));
     border-top: 1px solid lightgrey;
-    margin:  0;
+    margin: 0;
     padding: 0;
-    
   }
 }

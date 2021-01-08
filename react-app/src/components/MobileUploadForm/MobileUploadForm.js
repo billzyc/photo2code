@@ -1,6 +1,5 @@
 import React, { useState, useRef, useContext } from "react";
 import { useCookies } from "react-cookie";
-import { useForm } from "react-hook-form";
 
 import "./MobileUploadForm.scss";
 import closeSVG from "../../assets/svg/close.svg";
