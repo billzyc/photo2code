@@ -27,7 +27,7 @@
     width: 150px;
     height: 40px;
     border-radius: 10px;
-    border: 1px lightblue solid;
+    border: 1px $lightBlue solid;
 
     &.disabled{
       border-color: lightgrey;
