@@ -32,3 +32,5 @@ react-app/yarn-debug.log*
 react-app/yarn-error.log*
 react-app/.eslintcache
 
+#VsCode
+.vscode/
