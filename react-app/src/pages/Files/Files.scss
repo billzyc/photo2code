@@ -1,0 +1,50 @@
+@import "../../styles/shared.scss";
+
+.files {
+  $camera-bar-height: 65px;
+  padding-bottom: $camera-bar-height;
+
+
+  // .files-content {
+  //   padding: 0 15px;
+  // }
+
+  .files-header {
+    padding-top: 30px;
+    padding-bottom: 15px;
+    margin: 0;
+    text-align: left;
+  }
+
+  .mobile-upload-form-container,
+  .camera-bar-container {
+    position: Fixed;
+    width: 100%;
+  }
+  .camera-bar-container {
+    left: 0;
+    bottom: 0;
+    height: $camera-bar-height;
+  }
+
+  .mobile-upload-form-container {
+    bottom: calc(#{-$mobile-upload-height} - 115px);
+    transition: all 500ms ease-in-out;
+
+    &.active {
+      bottom: 0;
+      transition: all 500ms ease-in-out;
+    }
+  }
+}
+
+@include breakpoint(desktopSm) {
+  $camera-bar-height: 0px;
+  .files {
+    padding-bottom: $camera-bar-height;
+    .camera-bar-container,
+    .mobile-upload-form-container {
+      display: none;
+    }
+  }
+}

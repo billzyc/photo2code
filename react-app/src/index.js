@@ -1,12 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.scss';
-import App from './App';
+import ReactDOM from "react-dom";
+import React from "react";
+import "./index.scss";
+import App from "./App";
+import { CookiesProvider } from "react-cookie";
+
+import UserContextProvider from "./contexts/UserContext";
+import FilesContextProvider from "./contexts/FilesContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CookiesProvider>
+      <UserContextProvider>
+        <FilesContextProvider>
+          <App />
+        </FilesContextProvider>
+      </UserContextProvider>
+    </CookiesProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
