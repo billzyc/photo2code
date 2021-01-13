@@ -3,20 +3,27 @@ from flask import jsonify, request
 from functools import wraps
 import jwt
 
-def authenticateToken(func):
+
+def get_profile_from_token(webRequest):
+    token = webRequest.headers.get('Jwt')
+
+    if not token:
+        return None
+
+    try:
+        return jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+
+    except:
+        return None
+
+
+def authenticate_token(func):
     @wraps(func)
     def wrapped(*args, **kwargs):
-        token =  request.headers.get('Jwt')
-        
-        if not token:
-            return jsonify({'message': 'Missing token'}), 403
-        
-        try:
-            user_data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
-            print(user_data)
+        user_info = get_profile_from_token(request)
 
-        except:
-            return jsonify({'message': 'Invalid token'}), 403
-        
+        if not user_info:
+            return jsonify({'message': 'Missing or Invalid token'}), 403
+
         return func(*args, **kwargs)
     return wrapped

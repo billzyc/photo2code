@@ -1,0 +1,33 @@
+@import "../../styles/shared.scss";
+
+.files-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .files-container {
+    width: 100%;
+    max-width: 1440px;
+
+    .files-list-header {
+      margin-left: $file-tile-padding;
+      margin-right: 100%;
+      margin-bottom: 20px;
+    }
+
+    .mobile-phone-img {
+      width: 80%;
+    }
+
+    .empty-file-text {
+      padding: 45px;
+    }
+  }
+}
+
+@include breakpoint(desktopSm) {
+  .mobile-phone-img {
+    width: 500px;
+  }
+}
