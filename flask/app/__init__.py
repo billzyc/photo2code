@@ -11,8 +11,6 @@ app = Flask(__name__)
 ##TODO: set up resource specific cors
 CORS(app)
 
-
-app.secret_key = os.environ.get('SECRET_KEY') or os.urandom(24)
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

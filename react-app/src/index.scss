@@ -1,1 +1,7 @@
-@import 'styles/shared.scss';
+@import 'styles/global.scss';
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: $lightBlue;
+}

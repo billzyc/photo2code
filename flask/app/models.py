@@ -17,9 +17,9 @@ class User(db.Model):
         self.last_name = last_name
 
     def __repr__(self):
-        return f'User id: {id} email:{email}'
+        return f'User id: {self.id} email:{self.email}'
 
-    def profileMap(self):
+    def get_map(self):
         return {
             'id': self.id,
             'email': self.email,
@@ -34,12 +34,18 @@ class CodeFile(db.Model):
     date_posted = db.Column(db.DateTime, nullable=False,
                             default=datetime.utcnow)
     content = db.Column(db.Text, nullable=True)
-    language = db.Column(db.String(50), nullable=False)
+    extension = db.Column(db.String(50), nullable=False)
     # image_file = db.Column(db.String(20), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    
+    def get_map(self):
+        return {'id': self.id, 'title': self.title, 'date_posted': self.date_posted, 'extension': self.extension, 'user_id': self.user_id, 'content': self.content}
+    
+    def __repr__(self):
+        return f'id: {self.id}, title: {self.title}, date_posted: {self.date_posted}, extension: {self.extension}, user_id: {self.user_id}, content: {self.content}'
 
-    def __init__(self, title, content, language, user_id):
+    def __init__(self, title, content, extension, user_id):
         self.title = title
         self.content = content
-        self.language = language
+        self.extension = extension
         self.user_id = user_id

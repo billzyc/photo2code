@@ -1,2 +1,10 @@
-
 @import 'styles/shared.scss';
+
+.app {
+  position: relative;
+  height: 100%;
+  .app-content {
+    padding-top: calc(#{$nav-bar-height} + #{$nav-bar-vertical-padding});
+    height: 100%;
+  }
+}
