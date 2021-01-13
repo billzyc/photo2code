@@ -22,6 +22,7 @@ function App() {
       getUserInformation(cookies.token, updateUserContext, updateFiles);
     }
     setIsLoading(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //TODO: replace placeholder spinner

@@ -9,8 +9,7 @@ class Config(object):
     TESTING = True
     CSRF_ENABLED = True
     ##TODO: Change this!!
-    SECRET_KEY = 'app secret'
-    # SECRET_KEY = os.urandom(24)  
+    SECRET_KEY = os.getenv('SECRET_KEY', os.urandom(24))
 
 class ProductionConfig(Config):
     DEBUG = False

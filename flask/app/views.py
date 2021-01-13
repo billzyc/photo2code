@@ -4,7 +4,7 @@ from flask import Flask, jsonify, request, render_template, redirect, send_file,
 from io import BytesIO
 from flask import redirect, url_for, session, render_template
 from app.ocr import get_image_text
-from app.utils.authenticate import authenticateToken, getProfileFromToken
+from app.utils.authenticate import authenticate_token, get_profile_from_token
 from google.oauth2 import id_token
 from google.auth.transport import requests
 
@@ -53,23 +53,23 @@ def googleSignin():
 
 
 @app.route('/profile', methods=['GET'])
-@authenticateToken
+@authenticate_token
 def testauth():
-    user_data = getProfileFromToken(request)
+    user_data = get_profile_from_token(request)
     user_profile = User.query.filter_by(email=user_data['user']).first()
     if user_profile:
-        return jsonify({'user_profile': user_profile.getMap()})
+        return jsonify({'user_profile': user_profile.get_map()})
     return jsonify({'message': 'No profiles exist'}), 403
 
 
 @app.route('/upload', methods=['POST'])
-@authenticateToken
+@authenticate_token
 def upload():
     try:
         file_name = request.values['name']
         image = request.files['image']
         extension = request.values['extension']
-        user_data = getProfileFromToken(request)
+        user_data = get_profile_from_token(request)
         user_id = User.query.filter_by(email=user_data['user']).first().id
         if file_name and user_id and extension and image is not None:
             text = get_image_text(image)
@@ -87,11 +87,11 @@ def upload():
         return jsonify({'message': 'Invalid upload'}), 403
 
 @app.route('/delete_file', methods=['POST'])
-@authenticateToken
+@authenticate_token
 def deleteFile():
     try:
         file_id = request.json['fileID']
-        user_data = getProfileFromToken(request)
+        user_data = get_profile_from_token(request)
         user_id = User.query.filter_by(email=user_data['user']).first().id
         if file_id and user_id :
             target_file = CodeFile.query.filter_by(user_id=user_id, id= file_id).first()
@@ -104,17 +104,17 @@ def deleteFile():
 
 
 
-@app.route('/files', methods=['GET'])
-@authenticateToken
-def files():
+@app.route('/get_files', methods=['GET'])
+@authenticate_token
+def get_files():
     try:
-        user_data = getProfileFromToken(request)
+        user_data = get_profile_from_token(request)
         user_id = User.query.filter_by(email=user_data['user']).first().id
         if user_id:
             files = CodeFile.query.filter_by(user_id=user_id).all()
             data = []
             for file in files:
-                data.append(file.getMap())
+                data.append(file.get_map())
             return jsonify({'files': data})
         return jsonify({'message': 'Missing User Information'}), 403
     except:
@@ -122,9 +122,9 @@ def files():
 
 
 # @app.route('/download-file', methods=['POST'])
-# @authenticateToken
+# @authenticate_token
 # def download_file():
-#     user_data = getProfileFromToken(request)
+#     user_data = get_profile_from_token(request)
 #     user_id = User.query.filter_by(email=user_data['user']).first().id
 #     if user_id:
 #         file_id = request.json['fileID']
@@ -169,7 +169,7 @@ def authorize():
         )
         db.session.add(user_profile)
         db.session.commit()
-    session['profile'] = user_profile.getMap()
+    session['profile'] = user_profile.get_map()
     session.permanent = (
         True  # make the session permanant so it keeps existing after broweser gets closed
     )

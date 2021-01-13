@@ -19,7 +19,7 @@ class User(db.Model):
     def __repr__(self):
         return f'User id: {self.id} email:{self.email}'
 
-    def getMap(self):
+    def get_map(self):
         return {
             'id': self.id,
             'email': self.email,
@@ -38,7 +38,7 @@ class CodeFile(db.Model):
     # image_file = db.Column(db.String(20), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
-    def getMap(self):
+    def get_map(self):
         return {'id': self.id, 'title': self.title, 'date_posted': self.date_posted, 'extension': self.extension, 'user_id': self.user_id, 'content': self.content}
     
     def __repr__(self):

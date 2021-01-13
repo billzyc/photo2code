@@ -87,9 +87,9 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
         placeholder="File Name"
       />
       <select
-        id="Languages"
+        id="languages"
         className={`${fileExtension ? null : "empty"}`}
-        name="Languages"
+        name="languages"
         defaultValue=""
         required
         onChange={onLanguageChange}

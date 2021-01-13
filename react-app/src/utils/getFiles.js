@@ -1,5 +1,5 @@
 const getFiles = async (token, updateFiles) => {
-  const filesRes = await fetch("http://127.0.0.1:5000/files", {
+  const filesRes = await fetch("http://127.0.0.1:5000/get_files", {
     method: "GET",
     headers: {
       Jwt: token,
