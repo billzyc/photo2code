@@ -1,5 +1,9 @@
+import { photo2codeAPI, PHOTO2CODE_ROUTES } from '../consts/urls';
+
 const getUserInformation = async (token, updateUserContext, updateFiles) => {
-  const profileRes = await fetch("http://127.0.0.1:5000/profile", {
+  const { PROFILE, GET_FILES} = PHOTO2CODE_ROUTES;
+
+  const profileRes = await fetch(`${photo2codeAPI}${PROFILE}`, {
     method: "GET",
     headers: {
       Jwt: token,
@@ -16,8 +20,8 @@ const getUserInformation = async (token, updateUserContext, updateFiles) => {
       userID: userProfile["id"],
     });
   }
-
-  const filesRes = await fetch("http://127.0.0.1:5000/get_files", {
+  
+  const filesRes = await fetch(`${photo2codeAPI}${GET_FILES}`, {
     method: "GET",
     headers: {
       Jwt: token,

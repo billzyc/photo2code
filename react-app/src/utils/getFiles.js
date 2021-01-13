@@ -1,5 +1,8 @@
+import { photo2codeAPI, PHOTO2CODE_ROUTES } from '../consts/urls';
+
 const getFiles = async (token, updateFiles) => {
-  const filesRes = await fetch("http://127.0.0.1:5000/get_files", {
+  const { GET_FILES } = PHOTO2CODE_ROUTES;
+  const filesRes = await fetch(`${photo2codeAPI}${GET_FILES}`, {
     method: "GET",
     headers: {
       Jwt: token,

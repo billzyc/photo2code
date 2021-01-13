@@ -4,7 +4,7 @@ export const UserContext = createContext();
 
 class UserContextProvider extends Component{
     state ={
-        userEmail: 'hi',
+        userEmail: '',
         userFirstName: '',
         userLastName: '',
         userID:''
