@@ -110,7 +110,7 @@ const MobileUploadForm = ({ isMobileUploadOpen, setIsMobileUploadOpen }) => {
         }}
       />
       {isLoading ? (
-        <PulseLoader size={30} />
+        <PulseLoader size={15} />
       ) : isError ? (
         <div className="upload-error">
           <div class="error-text">
