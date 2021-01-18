@@ -1,10 +1,9 @@
 @import "../../styles/shared.scss";
 
-.form {
+.form-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: center;
   padding: 20px;
   padding-top: 60px;
   height: $mobile-upload-height;
@@ -13,39 +12,74 @@
   border-top-right-radius: 20px;
   box-shadow: $soft-shadow;
 
-  .form-close{
+  .form-close {
     position: absolute;
     top: 20px;
     right: 20px;
   }
 
-  .real-camera-input {
-    display: none;
-  }
+  > .upload-error {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    
+    >.error-text{
+      @include flex-center;
+      padding-bottom: 15px;
 
-  .fake-camera-input{
-    width: 150px;
-    height: 40px;
-    border-radius: 10px;
-    border: 1px $lightBlue solid;
+      >img{
+        padding-right: 5px;
+      }
+    }
 
-    &.disabled{
-      border-color: lightgrey;
+    >img{
+      width: 150px;
+      padding-bottom: 10px;
+    }
+
+    >button{
+      width: 150px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px lightgrey solid;
     }
   }
 
-  >.text-input, #languages{
-    border: 1px lightgrey solid;
-    border-radius: 10px;
-    width: 80%;
-    height: 50px;
-    padding: 10px;
-    margin-bottom: 30px;
-    background-color: white;
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
 
-    &.empty{
-      color: grey;
+    .real-camera-input {
+      display: none;
+    }
+
+    .fake-camera-input {
+      width: 150px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px $lightBlue solid;
+
+      &.disabled {
+        border-color: lightgrey;
+      }
+    }
+
+    > .text-input,
+    #languages {
+      border: 1px lightgrey solid;
+      border-radius: 10px;
+      width: 80%;
+      height: 50px;
+      padding: 10px;
+      margin-bottom: 30px;
+      background-color: white;
+
+      &.empty {
+        color: grey;
+      }
     }
   }
-
 }

@@ -15,14 +15,14 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const { userEmail, userID, updateUserContext } = useContext(UserContext);
   const { updateFiles } = useContext(FilesContext);
-  const [cookies, setCookie] = useCookies(["token"]);
+  const [cookies] = useCookies(["token"]);
 
   useEffect(() => {
     if (cookies.token) {
       getUserInformation(cookies.token, updateUserContext, updateFiles);
     }
     setIsLoading(false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //TODO: replace placeholder spinner

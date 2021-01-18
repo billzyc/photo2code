@@ -10,7 +10,6 @@ function Files() {
   return (
     <div className="files">
       <div className="files-content">
-        
         <FilesList />
         <div className="camera-bar-container">
           <CameraBar setIsMobileUploadOpen={setIsMobileUploadOpen} />
@@ -22,7 +21,10 @@ function Files() {
           isMobileUploadOpen ? "active" : ""
         }`}
       >
-        <MobileUploadForm setIsMobileUploadOpen={setIsMobileUploadOpen} />
+        <MobileUploadForm
+          isMobileUploadOpen={isMobileUploadOpen}
+          setIsMobileUploadOpen={setIsMobileUploadOpen}
+        />
       </div>
     </div>
   );
