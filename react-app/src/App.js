@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import ClipLoader from "react-spinners/ClipLoader";
+import PulseLoader from "react-spinners/PulseLoader";
 import { useCookies } from "react-cookie";
 
 import "./App.scss";
@@ -31,7 +31,7 @@ function App() {
       <NavBar />
       <div className="app-content">
         {isLoading ? (
-          <ClipLoader size={150} />
+          <PulseLoader size={30} />
         ) : userEmail && userID ? (
           <Files />
         ) : (
