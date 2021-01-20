@@ -18,10 +18,13 @@ function App() {
   const [cookies] = useCookies(["token"]);
 
   useEffect(() => {
-    if (cookies.token) {
-      getUserInformation(cookies.token, updateUserContext, updateFiles);
-    }
-    setIsLoading(false);
+    const loadData = async () => {
+      if (cookies.token) {
+        await getUserInformation(cookies.token, updateUserContext, updateFiles);
+      }
+      setIsLoading(false);
+    };
+    loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
