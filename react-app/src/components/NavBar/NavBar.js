@@ -10,7 +10,7 @@ function NavBar() {
   return (
     <div className="navBar">
       <h3>{"<Photo2Code>"}</h3>
-      {userEmail && userID ? <Profile /> : <GoogleOAuth />}
+      <GoogleOAuth />
     </div>
   );
 }

@@ -1,6 +1,12 @@
-@import '../../styles/shared.scss';
+@import "../../styles/shared.scss";
 
-.login-button{
-    width: 100px;
-    height: 50px;
+.login-button,
+.logout-button {
+  width: 100px;
+  height: 50px;
+}
+
+.logout-button {
+  border-radius: 10px;
+  box-shadow: $soft-shadow;
 }
