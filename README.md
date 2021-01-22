@@ -1,5 +1,12 @@
 # photo2code
+photo2code.netlify.app/
 
+An application that allows users to convert whiteboard and handwritten code to source code. Users can access and
+download converted source code files from their account and then edit and compile them on their computer, enabling them to
+quickly validate whiteboard solutions, use lecture slide code or have a repository for their handwritten code.
+
+Built using Python , Flask , PostgreSQL , React , JavaScript , and Google Cloud Vision API . Account authentication
+implemented using OAuth 2.0 and JWT .
 
 ## Flask:  
 
