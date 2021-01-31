@@ -8,6 +8,7 @@ import downloadSVG from "../../assets/svg/download.svg";
 import fileSVG from "../../assets/svg/file.svg";
 import trashSVG from "../../assets/svg/trash.svg";
 import { FilesContext } from "../../contexts/FilesContext";
+import { photo2codeAPI, PHOTO2CODE_ROUTES } from "../../consts/urls";
 
 const FileTile = ({ file }) => {
   const [cookies] = useCookies(["token"]);
@@ -30,8 +31,8 @@ const FileTile = ({ file }) => {
       headers: { "Content-Type": "application/json", Jwt: cookies.token },
       body: JSON.stringify({ fileID: file.id }),
     };
-
-    await fetch("http://127.0.0.1:5000/delete_file", requestOptions);
+    const { DELETE } = PHOTO2CODE_ROUTES
+    await fetch(`${photo2codeAPI}${DELETE}`, requestOptions);
 
     await getFiles(cookies.token, updateFiles);
   };

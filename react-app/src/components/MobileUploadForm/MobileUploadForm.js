@@ -6,6 +6,7 @@ import closeSVG from "../../assets/svg/close.svg";
 import getFiles from "../../utils/getFiles";
 import { FilesContext } from "../../contexts/FilesContext";
 import { languages } from "../../consts/languages";
+import { photo2codeAPI, PHOTO2CODE_ROUTES} from "../../consts/urls";
 
 const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
   const [fileExtension, setFileExtension] = useState("");
@@ -38,7 +39,9 @@ const MobileUploadForm = ({ setIsMobileUploadOpen }) => {
     formData.append("name", fileName);
     formData.append("extension", fileExtension);
 
-    const res = await fetch("http://127.0.0.1:5000/upload", {
+    const { UPLOAD } = PHOTO2CODE_ROUTES;
+
+    const res = await fetch(`${photo2codeAPI}${UPLOAD}`, {
       method: "POST",
       headers: {
         Jwt: cookies.token,

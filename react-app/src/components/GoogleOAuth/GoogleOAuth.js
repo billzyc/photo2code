@@ -6,6 +6,7 @@ import "./GoogleOAuth.scss";
 import { UserContext } from "../../contexts/UserContext";
 import getUserInformation from "../../utils/getUserInformation";
 import { FilesContext } from "../../contexts/FilesContext";
+import { photo2codeAPI, PHOTO2CODE_ROUTES } from "../../consts/urls";
 
 function GoogleOAuth() {
   const [cookies, setCookie] = useCookies(["token"]);
@@ -22,8 +23,10 @@ function GoogleOAuth() {
       body: JSON.stringify({ gToken: response.tokenId }),
     };
 
+    const { GOOGLE_SIGN_IN } = PHOTO2CODE_ROUTES;
+
     const apiResponse = await fetch(
-      "http://127.0.0.1:5000/googleSignin",
+      `${photo2codeAPI}${GOOGLE_SIGN_IN}`,
       requestOptions
     );
 

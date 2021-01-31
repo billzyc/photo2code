@@ -18,16 +18,11 @@
 
     .mobile-phone-img {
       width: 80%;
+      max-width: 500px;
     }
 
     .empty-file-text {
       padding: 45px;
     }
-  }
-}
-
-@include breakpoint(desktopSm) {
-  .mobile-phone-img {
-    width: 500px;
   }
 }
