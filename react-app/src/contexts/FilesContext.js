@@ -1,23 +1,33 @@
-import React, {createContext, Component} from 'react';
+import React, { createContext, Component } from "react";
 
 export const FilesContext = createContext();
 
-class FilesContextProvider extends Component{
-    state ={
-        userFiles: []
-    }
+class FilesContextProvider extends Component {
+  state = {
+    userFiles: [],
+  };
 
-    updateFiles = (files) =>{
-        this.setState({userFiles: [...files]})
-    } 
+  updateFiles = (files) => {
+    this.setState({ userFiles: [...files] });
+  };
 
-    render(){
-        return(
-            <FilesContext.Provider value={{...this.state, updateFiles: this.updateFiles}}>
-                {this.props.children}
-            </FilesContext.Provider>
-        );
-    }
+  clearFiles = () => {
+    this.setState({ userFiles: [] });
+  };
+
+  render() {
+    return (
+      <FilesContext.Provider
+        value={{
+          ...this.state,
+          updateFiles: this.updateFiles,
+          clearFiles: this.clearFiles,
+        }}
+      >
+        {this.props.children}
+      </FilesContext.Provider>
+    );
+  }
 }
 
 export default FilesContextProvider;

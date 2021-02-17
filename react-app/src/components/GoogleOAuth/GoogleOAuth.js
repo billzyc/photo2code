@@ -9,9 +9,10 @@ import { FilesContext } from "../../contexts/FilesContext";
 import { photo2codeAPI, PHOTO2CODE_ROUTES } from "../../consts/urls";
 
 function GoogleOAuth() {
-  const [cookies, setCookie] = useCookies(["token"]);
-  const { updateUserContext } = useContext(UserContext);
-  const { updateFiles } = useContext(FilesContext);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const { updateUserContext, clearUserContext } = useContext(UserContext);
+  const { updateFiles, clearFiles } = useContext(FilesContext);
+  const { userEmail, userID } = useContext(UserContext);
 
   const clientId =
     "681258670642-cdmnl2u2f679khc07railjprdct59n66.apps.googleusercontent.com";
@@ -48,7 +49,18 @@ function GoogleOAuth() {
     console.log("failed!");
   };
 
-  return (
+  const logOut = async () => {
+    //TODO: add loader for logout
+    await clearUserContext();
+    await clearFiles();
+    await removeCookie("token", { path: "/" });
+  };
+
+  return userEmail && userID ? (
+    <button className="logout-button" onClick={logOut}>
+      Log Out
+    </button>
+  ) : (
     <GoogleLogin
       className="login-button"
       clientId={clientId}
