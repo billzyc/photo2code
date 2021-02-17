@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import ClipLoader from "react-spinners/ClipLoader";
+import PulseLoader from "react-spinners/PulseLoader";
 import { useCookies } from "react-cookie";
 
 import "./App.scss";
@@ -15,14 +15,17 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const { userEmail, userID, updateUserContext } = useContext(UserContext);
   const { updateFiles } = useContext(FilesContext);
-  const [cookies, setCookie] = useCookies(["token"]);
+  const [cookies] = useCookies(["token"]);
 
   useEffect(() => {
-    if (cookies.token) {
-      getUserInformation(cookies.token, updateUserContext, updateFiles);
-    }
-    setIsLoading(false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    const loadData = async () => {
+      if (cookies.token) {
+        await getUserInformation(cookies.token, updateUserContext, updateFiles);
+      }
+      setIsLoading(false);
+    };
+    loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //TODO: replace placeholder spinner
@@ -31,7 +34,7 @@ function App() {
       <NavBar />
       <div className="app-content">
         {isLoading ? (
-          <ClipLoader size={150} />
+          <PulseLoader size={30} />
         ) : userEmail && userID ? (
           <Files />
         ) : (
