@@ -2,7 +2,6 @@ import React, { createContext, Component } from "react";
 
 export const UserContext = createContext();
 
-<<<<<<< HEAD
 class UserContextProvider extends Component {
   state = {
     userEmail: "",
@@ -10,15 +9,6 @@ class UserContextProvider extends Component {
     userLastName: "",
     userID: "",
   };
-=======
-class UserContextProvider extends Component{
-    state ={
-        userEmail: '',
-        userFirstName: '',
-        userLastName: '',
-        userID:''
-    }
->>>>>>> main
 
   updateUserContext = (userProfile) => {
     this.setState({ ...this.state, ...userProfile });
