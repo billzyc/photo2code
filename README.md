@@ -1,11 +1,20 @@
 # photo2code
+https://photo2code.netlify.app/
 
+An application that allows users to convert whiteboard and handwritten code to source code. Users can access and
+download converted source code files from their account and then edit and compile them on their computer, enabling them to
+quickly validate whiteboard solutions, use lecture slide code or have a repository for their handwritten code.
+
+Built using Python , Flask , PostgreSQL , React , JavaScript , and Google Cloud Vision API . Account authentication
+implemented using OAuth 2.0 and JWT .
+
+# Local Development Setup. 
 
 ## Flask:  
 
 First time local development set up:
 
-1)
+1)  
 `cd flask/`  
 `python3 -m venv env`  
 `cd ..`  
@@ -13,7 +22,7 @@ First time local development set up:
 ``echo "source `which activate.sh`" >> ~/.bashrc``
 `source ~/.bashrc`
 
-3) create PSQL DB called "photo2code_dev"
+3) create PSQL DB called "photo2code_dev". 
 
 4) Run dev server  
 `cd flask/`  
@@ -21,8 +30,6 @@ First time local development set up:
 Set Google Client Id/Secret environment variable (See section below).  
 `python3 manage.py db upgrade`  
 `flask run`  
-
-
 
 Misc:  
 
@@ -35,18 +42,7 @@ To initialize Alembic - `python3 manage.py db init`
 Create migration - `python3 manage.py db migrate`  
 Apply upgrades - `python3 manage.py db upgrade`  
 
-## Docker:  
-Build services:
-`docker-compose build`
 
-Start the containers:
-`docker-compose up`
-
-To build and start containers:
-`docker-compose up -d --build`
-
-Remove containers and network:
- `docker-compose down -v`
 
 ## Set environmental variables
 
@@ -62,6 +58,6 @@ Windows:
 ## React
 
 For local dev:  
-`cd react-app`
-`npm install`
+`cd react-app`  
+`npm install`  
 `npm start`  
